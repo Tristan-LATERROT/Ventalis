@@ -1,0 +1,52 @@
+*******************************************************************************
+******************* DB_VENTALIS ***********************************************
+*******************************************************************************
+
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+users
+- - - - - - - - - - - - - - - - - - - - - - - - -
+id
+email
+password
+firstName
+lastName
+companyName
+
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE users (
+id VARCHAR(255) NOT NULL PRIMARY KEY,
+email VARCHAR(255) NOT NULL UNIQUE,
+pwd VARCHAR(255) NOT NULL,
+firstName VARCHAR(50)NOT NULL,
+lastName VARCHAR(50)NOT NULL,
+companyName VARCHAR(50),
+salesAdvisor VARCHAR(50)
+)
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+roles
+- - - - - - - - - - - - - - - - - - - - - - - - -
+id
+roleName
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE users_roles (		
+id INT(11) PRIMARY KEY AUTO_INCREMENT,
+RoleName VARCHAR(50) NOT NULL
+)
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+users_roles
+- - - - - - - - - - - - - - - - - - - - - - - - -
+id
+userId
+roleId
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE users_roles (		
+userRoleId INT(11) PRIMARY KEY AUTO_INCREMENT,
+userId VARCHAR(255) NOT NULL PRIMARY KEY,
+roleId VARCHAR(50) NOT NULL PRIMARY KEY
+)
