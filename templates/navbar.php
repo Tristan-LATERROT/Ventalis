@@ -35,7 +35,7 @@
 				</li>
 				<li class="nav-item">
 					<a 
-					href="" 
+					href="presentation.php" 
 					class="nav-link <?php if($page =='presentation') {echo 'active" aria-current="page';} ?>">
 					Présentation
 					</a>

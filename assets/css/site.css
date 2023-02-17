@@ -9,6 +9,17 @@
     background-size: cover;
 }
 
+#corpPresentation {
+    /* Full view height */
+    min-height: 100vh;
+    /* The image used */
+    background-image: url("../img/bg-img/bg-firstRow-pexels-irina-iriser-1090977.jpg");
+    /* Center and scale */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 /* Push the footer down */
 body {
 	margin: 0;
