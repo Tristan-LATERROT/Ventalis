@@ -9,24 +9,36 @@ require_once('modules/signup.php');
 $errors = [];
 $messages = [];
 
-if(isset($_POST['createUser']) && !empty($_POST)) {
-    $password = $_POST['pwd'];
-    $res = checkPwd($password);
-    var_dump($res);
-    var_dump($_POST);
-
-    if($res) {
-        $qry = createUser($pdo, $_POST['email'], $_POST['pwd'], $_POST['firstName'], $_POST['lastName'], $_POST['companyName']);
-        if($qry) {
-            $messages[] = 'incription valide';
+if (isset($_POST['createUser'])) {
+    // on vient vérifier que les champs sont set et complétés
+    if(isset($_POST['email'], $_POST['pwd'], $_POST['firstName'], $_POST['lastName'], $_POST['companyName'])
+    && !empty($_POST['email']) 
+    && !empty($_POST['pwd']) 
+    && !empty($_POST['firstName']) 
+    && !empty($_POST['lastName'])
+    && !empty($_POST['companyName'])) 
+    {
+        //formulaire complet
+        // contrôle de la structure du mot de passe
+        $password = $_POST['pwd'];
+        $res = checkPwd($password);
+        if($res) {
+            // mot de passe ok
+            // creation du compte
+            $qry = createUser($pdo, $_POST['email'], $_POST['pwd'], $_POST['firstName'], $_POST['lastName'], $_POST['companyName']);
+            if($qry) {
+                $messages[] = 'incription valide vous pouvez à présent vous connecter';
+            } else {
+                $errors[] = 'erreur d\'inscription merci de refaire votre inscription'; 
+            }
         } else {
-            $errors[] = 'erreur d\'inscription merci de refaire votre inscription'; 
+            // mot de passe ne respecte pas les contraintes
+            $errors[] = 'erreur mot de passe invalide merci de refaire votre inscription'; 
         }
     } else {
-        $errors[] = 'erreur mot de passe invalide merci de refaire votre inscription'; 
+        // formulaire incomplet
+        $errors[] = 'merci de remplir tous les champs pour votre inscription';
     }
-} else {
-    $errors[] = 'merci de remplir les champs pour votre inscription';
 }
 ?>
 
