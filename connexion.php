@@ -22,7 +22,8 @@ if (isset($_POST['logIn'])) {
     if($user) {
         $messages[] = 'Utilisateur '.$user['firstName'].' '.$user['lastName'].' connecté';
         $_SESSION['user'] = $user['email'];
-        //header('location: index.php');
+        // redirection du user
+        header('location: index.php');
     } else {
         $errors[] = 'email ou mot de passe invalide';
     }

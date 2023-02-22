@@ -1,3 +1,7 @@
+<?php
+  require_once('settings/session.php');
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
