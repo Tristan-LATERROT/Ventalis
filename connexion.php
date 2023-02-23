@@ -9,9 +9,6 @@ require_once('modules/login.php');
 $errors = [];
 $messages = [];
 
-// $errors[] = 'email ou mot de passe invalide';
-// $messages[] = 'Utilisateur connecté';
-
 if (isset($_POST['logIn'])) {
     // on vient vérifier que les champs sont set et complétés
     if(isset($_POST['email'], $_POST['pwd'])
@@ -71,9 +68,11 @@ if (isset($_POST['logIn'])) {
     </div>
 
             <div class="container mx-auto">
-            <button type="submit" name="logIn" class="btn btn-success">Se connecter</button>
-            <a class="btn btn-warning" href="inscription.php">Créer un compte</a>
+                <button type="submit" name="logIn" class="btn btn-success">Se connecter</button>
+                <a class="btn btn-outline-success" href="inscription.php">Créer un compte</a>
+                <a class="btn btn-outline-danger" href="mdpOublie.php">Mot de passe oublié</a>
             </div>
+
 
 </form>
 </div>

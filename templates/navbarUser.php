@@ -65,6 +65,7 @@
 							height="30" 
 						/>
 					<span class="nav-item"><?=$_SESSION['user'];?></span>
+					<a href="espace.php" class="nav-item btn btn-outline-success me-md-2">Mon espace</a>
 					<a href="deconnexion.php" class="nav-item btn btn-outline-danger me-md-2">Se déconnecter</a>
 					</div>
 				</div>
