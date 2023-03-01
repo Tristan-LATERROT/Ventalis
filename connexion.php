@@ -9,6 +9,7 @@ require_once('modules/login.php');
 $errors = [];
 $messages = [];
 
+
 if (isset($_POST['logIn'])) {
     // on vient vérifier que les champs sont set et complétés
     if(isset($_POST['email'], $_POST['pwd'])
@@ -19,8 +20,16 @@ if (isset($_POST['logIn'])) {
     if($user) {
         $messages[] = 'Utilisateur '.$user['firstName'].' '.$user['lastName'].' connecté';
         $_SESSION['user'] = $user['email'];
-        // redirection du user
-        header('location: index.php');
+        $_SESSION['updatePwdRequired'] = $user['resetPwd'];
+
+        if ($_SESSION['updatePwdRequired'] == $testResetPwd) {
+            // redirection du user
+            header('location: mdpModification.php');
+        } else {
+            // redirection du user
+            header('location: espace.php');
+        }
+
     } else {
         $errors[] = 'email ou mot de passe invalide';
     }

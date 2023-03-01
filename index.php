@@ -2,6 +2,7 @@
 $title = 'VENTALIS-HOME';
 $page = 'index';
 require_once('templates/header.php');
+require_once('templates/redirectUsers.php');
 ?>
 
 <!-- Main -->

@@ -2,5 +2,5 @@
 // supprimer la session
 session_destroy();
 unset($_SESSION);
-// rerouter sur page d'accueil
-header("Location: index.php");
+// rerouter sur page de connexion
+header("Location: connexion.php");

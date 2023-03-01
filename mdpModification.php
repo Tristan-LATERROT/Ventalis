@@ -35,8 +35,8 @@ if (isset($_POST['updatePass'])) {
                     if($update) {
                         //E mise à jour du mot de passe OK
                         $messages[] = 'Mot de passe modifié';
-                        // redirection du user
-                        // header('location: connexion.php');
+                        // redirection du user pour reconnexion
+                        header('location: deconnexion.php');
                     } else {
                         //E echec mise à jour du mot de passe
                         $errors[] = 'Erreur de mise à jour';

@@ -1,5 +1,7 @@
 <?php
-  require_once('settings/session.php');
+require_once('settings/session.php');
+// gestions obligation update password :
+$testResetPwd = 'Y';
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +33,8 @@
 <!-- Navbar -->
 <?php
 if(isset($_SESSION["user"])) {
-    require 'navbarUser.php';
+    require_once 'navbarUser.php';
 } else {
-    require 'navbar.php';
+    require_once 'navbar.php';
 }
 ?>

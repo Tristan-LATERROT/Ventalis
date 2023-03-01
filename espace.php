@@ -2,11 +2,8 @@
 $title = 'MON-ESPACE';
 $page = 'espace';
 require_once('templates/header.php');
-// Rerouter un utilisateur non connecté
-if (!isset($_SESSION["user"])) {
-    header("location: connexion.php");
-    exit;
-}
+require_once('templates/redirectVisitors.php');
+require_once('templates/redirectUsers.php');
 ?>
 
 <!-- Main -->
