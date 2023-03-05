@@ -3,4 +3,4 @@
 session_destroy();
 unset($_SESSION);
 // rerouter sur page de connexion
-header("Location: connexion.php");
+header("Location: index.php");

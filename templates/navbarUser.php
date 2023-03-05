@@ -55,7 +55,27 @@
 							</a>
 						</li>
 					</ul>
+
 					<div class="mx-auto">
+					
+					<?php
+					if (in_array('R_ADMIN', $_SESSION['roles'])) {
+						// si l'utilisateur possède ce rôle
+					?>
+					<a href="espaceAdmin.php" class="nav-item btn btn-outline-success me-md-2">Espace Admin</a>
+					<?php
+						}
+					?>
+
+					<?php
+					if (in_array('R_SALES', $_SESSION['roles'])) {
+						// si l'utilisateur possède ce rôle
+					?>
+					<a href="espace.php" class="nav-item btn btn-outline-success me-md-2">Intranet</a>
+					<?php
+						}
+					?>
+
 					<img 
 							class=""
 							src="assets/img/user-icon.png" 

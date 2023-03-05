@@ -1,6 +1,6 @@
 <?php
-$title = 'MDP-OUBLIE';
-$page = 'mdpOublie';
+$title = 'MDP-MODIF';
+$page = 'mdpModification';
 require_once('templates/header.php');
 require_once('settings/pdo.php');
 require_once('modules/updatePwd.php');

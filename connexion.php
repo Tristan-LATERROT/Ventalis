@@ -9,6 +9,8 @@ require_once('modules/login.php');
 $errors = [];
 $messages = [];
 
+// gestion des rôles :
+// $userRoles = [];
 
 if (isset($_POST['logIn'])) {
     // on vient vérifier que les champs sont set et complétés
@@ -18,17 +20,20 @@ if (isset($_POST['logIn'])) {
     {
     $user = verifyUserToLog($pdo, $_POST['email'], $_POST['pwd']);
     if($user) {
-        $messages[] = 'Utilisateur '.$user['firstName'].' '.$user['lastName'].' connecté';
+        $messages[] = 'Utilisateur '.$user['firstName'].' '.$user['lastName'].' '.$user['id'].' connecté';
+        $userRoles = getUserRoles($pdo, $user['id']);
+        // Session
         $_SESSION['user'] = $user['email'];
         $_SESSION['updatePwdRequired'] = $user['resetPwd'];
+        $_SESSION['roles'] = $userRoles;
 
-        if ($_SESSION['updatePwdRequired'] == $testResetPwd) {
+        /* if ($_SESSION['updatePwdRequired'] == $testResetPwd) {
             // redirection du user
             header('location: mdpModification.php');
         } else {
             // redirection du user
             header('location: espace.php');
-        }
+        } */
 
     } else {
         $errors[] = 'email ou mot de passe invalide';
