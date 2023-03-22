@@ -33,7 +33,7 @@ if (isset($_POST['resetPass'])) {
 <main class="site-content">
 
 <div class="container-fluid text-dark">
-	<h2>Réinitialiser mon mot de passe oublié</h2>
+	<h2>Réinitialiser mot de passe</h2>
 </div>
 
 <?php foreach ($messages as $message) { ?>
@@ -52,16 +52,16 @@ if (isset($_POST['resetPass'])) {
 <form action="" method="POST">
     <div class="row">
         <div class="mb-3 col-auto">
-            <label for="email" class="form-label">Votre Email</label>
+            <label for="email" class="form-label">Email</label>
             <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">
-            Celui que vous avez utilisé pour créer votre compte. <br>
-            En cliquant sur réinitialiser mon mot de passe un nouveau vous sera envoyé par email, <br>
-            si vous avez un compte associé à cette adresse.
+            Celui utilisé pour créer le compte. <br>
+            En cliquant sur réinitialiser mot de passe un nouveau sera envoyé par email, <br>
+            si un compte est associé à cette adresse.
             </div>
         </div>
         <div class="mx-auto">
-            <button type="submit" name="resetPass" class="btn btn-warning">Réinitialiser mon mot de passe</button>
+            <button type="submit" name="resetPass" class="btn btn-warning">Réinitialiser mot de passe</button>
         </div>
     </div>
 

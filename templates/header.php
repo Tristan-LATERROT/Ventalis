@@ -9,7 +9,9 @@ $testResetPwd = 'Y';
 <head>
     <title><?php echo $title; ?></title>
     <meta charset="utf-8" />
-    <meta name="ventalis" content="Template web site" />
+    <meta name="ventalis marketing ecofriendly" content="Le partenaire de votre communication" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Favicon-->
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/png"/>
@@ -32,7 +34,7 @@ $testResetPwd = 'Y';
 
 <!-- Navbar -->
 <?php
-var_dump($_SESSION);
+// var_dump($_SESSION);
 if(isset($_SESSION["user"])) {
     require_once 'navbarUser.php';
 } else {

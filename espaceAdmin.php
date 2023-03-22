@@ -1,4 +1,5 @@
 <?php
+// page admin /!\
 $title = 'ESPACE-ADMIN';
 $page = 'espaceAdmin';
 require_once('templates/header.php');
@@ -11,9 +12,9 @@ require_once('templates/redirectUsers.php');
 
 <div class="container-fluid text-dark">
 		<h2>Espace Administrateur</h2>
-        <a href="" class="nav-item btn btn-outline-success me-md-2">Créer un utilisteur</a>
-        <a href="" class="nav-item btn btn-outline-danger me-md-2">Gérer les utilisteurs</a>
-        <a href="" class="nav-item btn btn-outline-danger me-md-2">Faire modifier son mot de passe à un utilisateur</a>
+        <a href="userCreer.php" class="nav-item btn btn-outline-success me-md-2">Créer un utilisteur employé</a>
+        <a href="usersAdmin.php?list=<?= $list='staff'?>" class="nav-item btn btn-outline-danger me-md-2">Gérer les utilisateurs employés</a>
+        <a href="usersAdmin.php?list=<?= $list='all'?>" class="nav-item btn btn-outline-danger me-md-2">Gérer tous les utilisteurs</a>
 </div>
 
 </main>

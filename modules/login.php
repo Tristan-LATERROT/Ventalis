@@ -15,7 +15,7 @@ if($user && password_verify($_POST['pwd'], $user['password'])) {
 
 function getUserRoles(PDO $pdo, string $id) {
     $userRoles = [];
-    $rolesQuery = $pdo->prepare("SELECT roleName FROM users_roles INNER JOIN roles ON roles.id = users_roles.roleId WHERE userId = :id");
+    $rolesQuery = $pdo->prepare("SELECT roleName FROM users_roles INNER JOIN roles ON roles.roleId = users_roles.roleId WHERE userId = :id");
     $rolesQuery->bindParam(':id', $id, PDO::PARAM_STR);
     if($rolesQuery->execute()){
         while($role = $rolesQuery->fetch(PDO::FETCH_ASSOC)) {

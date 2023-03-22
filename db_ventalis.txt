@@ -18,7 +18,7 @@ companyName
 CREATE TABLE users (
 id VARCHAR(255) NOT NULL PRIMARY KEY,
 email VARCHAR(255) NOT NULL UNIQUE,
-pwd VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL,
 firstName VARCHAR(50)NOT NULL,
 lastName VARCHAR(50)NOT NULL,
 companyName VARCHAR(50),
@@ -34,7 +34,7 @@ id
 roleName
 - - - - - - - - - - - - - - - - - - - - - - - - -
 CREATE TABLE roles (		
-id INT(11) PRIMARY KEY AUTO_INCREMENT,
+roleId INT(11) PRIMARY KEY AUTO_INCREMENT,
 roleName VARCHAR(50) NOT NULL
 );
 

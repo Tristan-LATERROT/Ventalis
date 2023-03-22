@@ -22,7 +22,7 @@ function resetForgotPwd(PDO $pdo, string $email) {
     }
 }
 
-function resetPwdRequired() {
+function resetPwdRequiredByEmail(PDO $pdo, string $email) {
     // flag pour demander une modification de mdp à la prochaine connexion
     $flag = 'Y';
     // update du champ resetPwd
@@ -30,4 +30,24 @@ function resetPwdRequired() {
         $query->bindValue(':flag', $flag , PDO::PARAM_STR);
         $query->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
         $query->execute();
+    if($query) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function resetPwdRequiredById(PDO $pdo, string $id) {
+    // flag pour demander une modification de mdp à la prochaine connexion
+    $flag = 'Y';
+    // update du champ resetPwd
+    $query = $pdo->prepare("UPDATE users SET resetPwd = :flag WHERE id = :id");
+        $query->bindValue(':flag', $flag , PDO::PARAM_STR);
+        $query->bindValue(':id', $id, PDO::PARAM_STR);
+        $query->execute();
+    if($query) {
+        return true;
+    } else {
+        return false;
+    }
 }
