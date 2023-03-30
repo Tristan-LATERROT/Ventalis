@@ -21,8 +21,6 @@ function getUserRoles(PDO $pdo, string $id) {
         while($role = $rolesQuery->fetch(PDO::FETCH_ASSOC)) {
             $userRoles = $role;
         }
-        var_dump($userRoles);
-
     }
 
     if($userRoles) {

@@ -26,14 +26,9 @@ if (isset($_POST['logIn'])) {
         $_SESSION['user'] = $user['email'];
         $_SESSION['updatePwdRequired'] = $user['resetPwd'];
         $_SESSION['roles'] = $userRoles;
-
-        /* if ($_SESSION['updatePwdRequired'] == $testResetPwd) {
-            // redirection du user
-            header('location: mdpModification.php');
-        } else {
-            // redirection du user
-            header('location: espace.php');
-        } */
+        // redirection du user
+        header('location: espace.php');
+        
 
     } else {
         $errors[] = 'email ou mot de passe invalide';

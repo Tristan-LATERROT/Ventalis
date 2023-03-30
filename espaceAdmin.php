@@ -5,6 +5,8 @@ $page = 'espaceAdmin';
 require_once('templates/header.php');
 require_once('templates/redirectVisitors.php');
 require_once('templates/redirectUsers.php');
+
+// list permet de filtrer sur le type de users à afficher dans usersAdmin.php :
 ?>
 
 <!-- Main -->

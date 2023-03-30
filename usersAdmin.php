@@ -8,8 +8,8 @@ require_once('settings/pdo.php');
 // gestions erreurs :
 $errors = [];
 $messages = [];
-var_dump($_GET['list']);
 
+// $list vient des différents btn de espaceAdmin.php
 // contrôle la variable GET si list existe et n'est pas vide dans l'URL
 if(isset($_GET['list']) && !empty($_GET['list'])) {
     // on vient nettoyer la valeur de list
