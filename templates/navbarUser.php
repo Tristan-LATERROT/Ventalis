@@ -71,7 +71,7 @@
 					if (in_array('R_SALES', $_SESSION['roles'])) {
 						// si l'utilisateur possède ce rôle
 					?>
-					<a href="espace.php" class="nav-item btn btn-outline-success me-md-2">Intranet</a>
+					<a href="espaceIntranet.php" class="nav-item btn btn-outline-success me-md-2">Intranet</a>
 					<?php
 						}
 					?>

@@ -65,3 +65,24 @@ INSERT INTO users_roles (userRoleId, roleId, userId) VALUES
 (NULL, 2, '63f361b74cb04');
 
 SELECT * FROM users_roles INNER JOIN roles ON roles.id = users_roles.roleId WHERE userId = '63f63e8868d93';
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+categories
+- - - - - - - - - - - - - - - - - - - - - - - - -
+categoryId
+categoryCode
+categoryName
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE categories (		
+categoryId INT(5) PRIMARY KEY AUTO_INCREMENT,
+categoryCode VARCHAR(25) NOT NULL UNIQUE,
+categoryName VARCHAR(50) NOT NULL UNIQUE
+);
+
+INSERT INTO categories (categoryId, categoryCode, categoryName) VALUES 
+(NULL, 'ECR', 'Ecriture'),
+(NULL, 'BUR', 'Accessoires de bureau'),
+(NULL, 'ACC', 'Accessoires'),
+(NULL, 'HTM', 'High tech et multimedia'),
+(NULL, 'TEX', 'Textile');
