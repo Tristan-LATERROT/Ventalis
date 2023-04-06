@@ -34,7 +34,7 @@ if (isset($_POST['createUser'])) {
                 // ecriture du role
                 $role = createRole($pdo, $userId['id'], 2);
                 if($role) {
-                    $reset = resetPwdRequired($pdo, $_POST['email']);
+                    $reset = resetPwdRequiredByEmail($pdo, $_POST['email']);
                     if($reset) {
                         $messages[] = 'incription valide vous pouvez à présent envoyer ses identifiants au collaborateur';
                         // redirection du user
