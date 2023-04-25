@@ -3,7 +3,7 @@
 
 // en cours de modif pour categories
 $title = 'VOIR-UTILISATEUR';
-$page = 'userDetails';
+$page = 'categorieEdition';
 require_once('templates/header.php');
 require_once('settings/pdo.php');
 

@@ -96,7 +96,8 @@ itemCode
 itemLabel
 itemDescription
 itemMinQty
-itemCategorycode
+itemCategoryCode
+itemVatCode
 itemMainPicture
 - - - - - - - - - - - - - - - - - - - - - - - - -
 CREATE TABLE items (
@@ -106,7 +107,7 @@ itemLabel VARCHAR(50) NOT NULL,
 itemDescription TEXT NOT NULL,
 itemMinQty INT(11) NOT NULL,
 itemCategoryCode VARCHAR(25) NOT NULL,
-itemVatCodeCode INT(5) NOT NULL,
+itemVatCode INT(5) NOT NULL,
 itemMainPicture VARCHAR(255) DEFAULT NULL
 );
 
