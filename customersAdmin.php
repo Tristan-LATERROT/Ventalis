@@ -75,7 +75,12 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
             
             
             <td>
-                <a class="btn btn-success" href="userDetails.php?id=<?= $row['id'] ?>">Voir</a>
+                <a class="btn btn-success" href="customerDetails.php?id=<?= $row['id'] ?>">
+                    Voir le client
+                </a>
+                <a class="btn btn-success" href="messages.php?id=<?= $row['id'] ?>">
+                    Voir messages
+                </a>
             </td>
         </tr>
         <?php

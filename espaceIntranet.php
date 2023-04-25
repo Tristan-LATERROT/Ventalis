@@ -17,6 +17,7 @@ require_once('templates/redirectUsers.php');
         <a href="produitCreer.php" class="nav-item btn btn-outline-success me-md-2">Créer un produit</a>
         <a href="produitsAdmin.php" class="nav-item btn btn-outline-danger me-md-2">Gérer les produits</a>
         <a href="customersAdmin.php" class="nav-item btn btn-outline-success me-md-2">Voir mes clients</a>
+        <a class="btn btn-success" href="messages.php">Messagerie</a>
 </div>
 
 </main>

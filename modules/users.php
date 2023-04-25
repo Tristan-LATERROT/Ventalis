@@ -25,5 +25,13 @@ function createRole(PDO $pdo, string $id, int $roleId) {
     return $query->execute();
 }
 
+function initSalesAdvisor(PDO $pdo, string $id) {
+    $sql = 'UPDATE users 
+            SET salesAdvisor = :id 
+            WHERE id = :id';
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':id', $id, PDO::PARAM_STR);
+    return $query->execute();
+}
 ?>
 

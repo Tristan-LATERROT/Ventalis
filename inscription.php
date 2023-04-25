@@ -25,7 +25,8 @@ if (isset($_POST['createUser'])) {
         if($res) {
             // mot de passe ok
             // creation du compte
-            $qry = createUser($pdo, $_POST['email'], $_POST['pwd'], $_POST['firstName'], $_POST['lastName'], $_POST['companyName']);
+            $salesAdvisor = getSalesAdvisor($pdo);
+            $qry = createUser($pdo, $_POST['email'], $_POST['pwd'], $_POST['firstName'], $_POST['lastName'], $_POST['companyName'], $salesAdvisor['salesAdvisor']);
             if($qry) {
                 $messages[] = 'incription valide vous pouvez à présent vous connecter';
             } else {

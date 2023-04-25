@@ -1,7 +1,7 @@
 <?php
 
-function createUser(PDO $pdo, string $email, string $password, string $firstName, string $lastName, string $companyName) {
-        $sql = "INSERT INTO users (id, email, password, firstName, lastName, companyName) VALUES (:id, :email, :password, :firstName, :lastName, :companyName)";
+function createUser(PDO $pdo, string $email, string $password, string $firstName, string $lastName, string $companyName, string $salesAdvisor) {
+        $sql = "INSERT INTO users (id, email, password, firstName, lastName, companyName, salesAdvisor) VALUES (:id, :email, :password, :firstName, :lastName, :companyName, :salesAdvisor)";
         $query = $pdo->prepare($sql);
         // generation de l'id
         $id = uniqid();
@@ -14,6 +14,7 @@ function createUser(PDO $pdo, string $email, string $password, string $firstName
         $query->bindParam(':firstName', $firstName, PDO::PARAM_STR);
         $query->bindParam(':lastName', $lastName, PDO::PARAM_STR);
         $query->bindParam(':companyName', $companyName, PDO::PARAM_STR);
+        $query->bindParam(':salesAdvisor', $salesAdvisor, PDO::PARAM_STR);
         
         return $query->execute();
 }
@@ -29,4 +30,15 @@ function checkPwd(string $password) {
     } else {
         return true;
     }
+}
+
+function getSalesAdvisor(PDO $pdo) {
+  $sql = "SELECT salesAdvisor, COUNT(salesAdvisor) FROM users 
+          WHERE salesAdvisor IS NOT null 
+          GROUP BY salesAdvisor ORDER BY COUNT(salesAdvisor) ASC";
+  $query = $pdo->prepare($sql);
+  $query->execute();
+  $advisorId = $query->fetch();
+
+  return $advisorId;
 }
