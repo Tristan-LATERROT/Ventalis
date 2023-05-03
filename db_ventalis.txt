@@ -203,3 +203,21 @@ INSERT INTO pricing (pricingId, pricingItemId, pricingQtyBracket, pricingUnitPri
 ('24-1000', 24, 1000, 4.5),
 ('25-1000', 25, 1000, 9.9),
 ('26-1000', 26, 1000, 1.7);
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+messages
+- - - - - - - - - - - - - - - - - - - - - - - - -
+msgId
+msgFromId
+msgToId
+msgBody
+msgTimestamp
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE messages (
+msgId INT(11) PRIMARY KEY AUTO_INCREMENT,
+msgFromId VARCHAR(255) NOT NULL,
+msgToId VARCHAR(255) NOT NULL,
+msg TEXT NOT NULL,
+msgTimestamp DATETIME NOT NULL
+);

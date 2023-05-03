@@ -78,7 +78,7 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
                 <a class="btn btn-success" href="customerDetails.php?id=<?= $row['id'] ?>">
                     Voir le client
                 </a>
-                <a class="btn btn-success" href="messages.php?id=<?= $row['id'] ?>">
+                <a class="btn btn-success" href="messagesListe.php?id=<?= $row['id'] ?>">
                     Voir messages
                 </a>
             </td>

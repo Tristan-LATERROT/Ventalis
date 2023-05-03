@@ -64,7 +64,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
                 </div>
                 <div class="container">
                 <p>Actions : </p>
-                        <a class="btn btn-success" href="messages.php?id=<?= $user['id'] ?>">
+                        <a class="btn btn-success" href="messagesListe.php?id=<?= $user['id'] ?>">
                             Voir messages avec <?= $user['firstName'].' '.$user['lastName'] ?>
                         </a>
                         <a class="btn btn-outline-success" href="espaceIntranet.php">
