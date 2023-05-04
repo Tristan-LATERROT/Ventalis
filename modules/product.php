@@ -14,8 +14,8 @@ function getProductImage(string|null $image) {
     }
 }
 
-function getRecipes(PDO $pdo, int $limit = null) {
-    $sql = 'SELECT * FROM recipes ORDER BY id DESC';
+function getProduct(PDO $pdo, int $limit = null) {
+    $sql = 'SELECT * FROM items ORDER BY itemId DESC';
 
     if ($limit) {
         $sql .= ' LIMIT :limit';
@@ -29,16 +29,4 @@ function getRecipes(PDO $pdo, int $limit = null) {
 
     $query->execute();
     return $query->fetchAll();
-}
-
-function saveRecipe(PDO $pdo, int $category, string $title, string $description, string $ingredients, string $instructions, string|null $image) {
-    $sql = "INSERT INTO items (id, category_id, title, description, ingredients, instructions, image) VALUES (NULL, :category_id, :title, :description, :ingredients, :instructions, :image);";
-    $query = $pdo->prepare($sql);
-    $query->bindParam(':category_id', $category, PDO::PARAM_INT);
-    $query->bindParam(':title', $title, PDO::PARAM_STR);
-    $query->bindParam(':description', $description, PDO::PARAM_STR);
-    $query->bindParam(':ingredients', $ingredients, PDO::PARAM_STR);
-    $query->bindParam(':instructions', $instructions, PDO::PARAM_STR);
-    $query->bindParam(':image', $image, PDO::PARAM_STR);
-    return $query->execute();
 }

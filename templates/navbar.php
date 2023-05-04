@@ -42,8 +42,8 @@
 				</li>
 				<li class="nav-item">
 					<a 
-					href="" 
-					class="nav-link <?php if($page =='produits') {echo 'active" aria-current="page';} ?>">
+					href="catalogue.php" 
+					class="nav-link <?php if($page =='catalogue') {echo 'active" aria-current="page';} ?>">
 					Catalogue
 					</a>
 				</li>
