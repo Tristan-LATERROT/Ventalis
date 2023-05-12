@@ -57,6 +57,16 @@
 					</ul>
 
 					<div class="mx-auto">
+
+					<img 
+							class=""
+							src="assets/img/user-icon.png" 
+							alt="User-icon" 
+							class="d-inline-block"
+							width="30"
+							height="30" 
+						/>
+					<span class="nav-item"><?=$_SESSION['user'];?></span>
 					
 					<?php
 					if (in_array('R_ADMIN', $_SESSION['roles'])) {
@@ -76,15 +86,18 @@
 						}
 					?>
 
-					<img 
-							class=""
-							src="assets/img/user-icon.png" 
-							alt="User-icon" 
-							class="d-inline-block"
-							width="30"
-							height="30" 
-						/>
-					<span class="nav-item"><?=$_SESSION['user'];?></span>
+					<?php
+					if (in_array('R_USER', $_SESSION['roles'])) {
+						// si l'utilisateur possède ce rôle
+					?>
+					<a class="btn btn-outline-dark mt-auto" href="panier.php">
+						<i class="bi bi-cart3"></i> Panier
+						<span class="badge bg-dark text-white ms-1 rounded-pill">2</span>
+					</a>
+					<?php
+						}
+					?>
+					
 					<a href="espace.php" class="nav-item btn btn-outline-success me-md-2">Mon espace</a>
 					<a href="deconnexion.php" class="nav-item btn btn-outline-danger me-md-2">Se déconnecter</a>
 					</div>

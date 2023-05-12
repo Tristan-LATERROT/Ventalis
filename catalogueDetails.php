@@ -9,47 +9,33 @@ require_once('settings/config.php');
 require_once('templates/navbarCategories.php');
 require_once('modules/product.php');
 
-// Header catalogue :
-$catalogueHeaderTitle = 'Les produits eco responsables pour votre communication';
-$catalogueHeaderMsg = 'Le catalogue de nos produits';
-
 // gestions erreurs :
 $errors = [];
 $messages = [];
 
 // contrôle la variable GET si la catégorie existe et n'est pas vide dans l'URL
-if(isset($_GET['category']) && !empty($_GET['category'])) {
+if(isset($_GET['productId']) && !empty($_GET['productId'])) {
     // on vient nettoyer la valeur de category
-    $getCategory = strip_tags($_GET['category']);
+    $productId = strip_tags($_GET['productId']);
     // Si ok on affiche tous le produits de cette catégorie
-    $products = getProductsSorted($pdo, _LIST_PRODUCTS_SORTED_LIMIT_, $getCategory);
-    $category = getCategory($pdo, $getCategory);
-    $catalogueHeaderMsg = $catalogueHeaderMsg.' '.$category['categoryName'];
-
-    // on vérifie si la catégorie existe
-    if(!$products) {
-        $errors[] = 'cette catégorie n\'existe pas';
+    $product = getProductById($pdo, $productId);
+    if ($product) {
+        $category = getCategory($pdo, $product['itemCategoryCode']);
+        $products = getProductsSorted($pdo, _LIST_PRODUCTS_SORTED_LIMIT_, $product['itemCategoryCode']);
+    }
+    // on vérifie si le produit existe
+    if(!$product) {
+        $errors[] = 'ce produit n\'existe pas';
     }
     
 
 } else {
-    // on affiche tous les produits
-    $products = getProducts($pdo, _LIST_PRODUCTS_LIMIT_);
+    // KO
 }
 ?>
 
 <!-- Main -->
 <main class="site-content">
-
-<!-- Header page -->
-<header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder"><?= $catalogueHeaderTitle ?></h1>
-                    <p class="lead fw-normal text-white-50 mb-0"><?= $catalogueHeaderMsg ?></p>
-                </div>
-            </div>
-</header>
 
 <?php foreach ($messages as $message) { ?>
     <div class="alert alert-success">
@@ -63,9 +49,42 @@ if(isset($_GET['category']) && !empty($_GET['category'])) {
     </div>
 <?php } ?>
 
-<!-- Section-->
-<section class="py-5">
+    <!-- Product section-->
+    <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6">
+                        <img class="card-img-top mb-5 mb-md-0" src="<?= getProductImage($product['itemMainPicture']); ?>" alt="..." />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="small mb-1"><?= $category['categoryName']?></div>
+                        <h1 class="display-5 fw-bolder"><?= $product['itemLabel']?></h1>
+                        <div class="fs-5 mb-5">
+                            <span><?= $product['itemBatchPrice'].' €*' ?></span>
+                            <p> <?= '*pour un lot de '.$product['itemQty'].' produits' ?></p>
+                        </div>
+                        <div class="small mb-1"><?= $product['itemCode']?></div>
+                        <p class="lead"><?= $product['itemDescription']?></p>
+                        <form action="panier.php">
+                        <div class="d-flex">
+                            <label for="inputQty">Nombre de lots à ajouter au panier : </label>
+                            <input class="form-control text-center me-3" id="inputQty" type="number" value="1" />
+                        </div>
+                        <div class="d-flex">
+                            <button class="btn btn-outline-dark mt-5 flex-shrink-0" type="submit">
+                            <i class="bi bi-cart3"></i> Ajouter au panier
+                            </button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+        <!-- Related category items section-->
+        <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="fw-bolder mb-4">Autres produits de la même catégorie</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
                     <?php
@@ -104,7 +123,7 @@ if(isset($_GET['category']) && !empty($_GET['category'])) {
 
                 </div>
             </div>
-</section>
+        </section>
 
 </main>
 
