@@ -42,10 +42,10 @@ $messages = [];
     <th>ID</th>
     <th>Code produit</th>
     <th>Libellé du produit</th>
-    <th>Description produit</th>
-    <th>Qté minimum de commande</th>
     <th>Catégorie</th>
     <th>Code TVA</th>
+    <th>Quantité du lot</th>
+    <th>Prix du lot HT</th>
     <th>Image principale</th>
     <th>Actions</th>
 </thead>
@@ -56,15 +56,15 @@ $messages = [];
         <tr>
             <td><?= $row['itemId'] ?></td>
             <td><?= $row['itemCode'] ?></td>
-            <td><?= $row['itemLabel'] ?></td>
-            <td><?= $row['itemDescription'] ?></td>
-            <td><?= $row['itemMinQty'] ?></td>
+            <td data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?= $row['itemDescription'] ?>"><?= $row['itemLabel'] ?></td>
             <td><?= $row['itemCategoryCode'] ?></td>
             <td><?= $row['itemVatCode'] ?></td>
+            <td><?= $row['itemQty'] ?></td>
+            <td><?= $row['itemBatchPrice'] ?></td>
             <td><?= $row['itemMainPicture'] ?></td>
             <td>
-                <a class="btn btn-warning" href="produitEdition.php?id=<?= $row['itemId'] ?>">Modifier</a>
-                <a class="btn btn-danger" href="produitSupprimer.php?id=<?= $row['itemId'] ?>">Supprimer</a>
+                <a class="btn btn-warning" href="produitEdition.php?id=<?= $row['itemId'] ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Modifier le produit"><i class="bi bi-pencil-fill"></i></a>
+                <a class="btn btn-danger" href="produitSupprimer.php?id=<?= $row['itemId'] ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer le produit"><i class="bi bi-trash3-fill"></i></a>
             </td>
         </tr>
         <?php

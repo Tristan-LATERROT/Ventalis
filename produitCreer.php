@@ -4,53 +4,50 @@ $title = 'CREER-CATEGORIE-PRODUIT';
 $page = 'produitCreer';
 require_once('templates/header.php');
 require_once('settings/pdo.php');
+require_once('settings/config.php');
+require_once('modules/product.php');
 
 // gestions messages et erreurs :
 $errors = [];
 $messages = [];
+$categories = getCategories($pdo);
 
 if (isset($_POST['createProduct'])) {
     // on vient vérifier que les champs sont set et complétés
     if(isset($_POST['productCode']) && !empty($_POST['productCode'])
     && isset($_POST['productLabel']) && !empty($_POST['productLabel']) 
     && isset($_POST['productDescription']) && !empty($_POST['productDescription'])
-    && isset($_POST['productMinQty']) && !empty($_POST['productMinQty'])
+    && isset($_POST['productQty']) && !empty($_POST['productQty'])
     && isset($_POST['productCategoryCode']) && !empty($_POST['productCategoryCode'])
     && isset($_POST['productVatCode']) && !empty($_POST['productVatCode'])
-    && isset($_POST['productMainPicture']) && !empty($_POST['productMainPicture'])
+    && isset($_POST['productBatchPrice']) && !empty($_POST['productBatchPrice'])
+    && isset($_POST['productMainPicture'])
     ) {
         //formulaire complet
         // On contrôle les données du formulaire
         $code =strip_tags($_POST['productCode']);
         $label =strip_tags($_POST['productLabel']);
         $description =strip_tags($_POST['productDescription']);
-        $minQty =strip_tags($_POST['productMinQty']);
+        $qty =strip_tags($_POST['productQty']);
         $categoryCode =strip_tags($_POST['productCategoryCode']);
         $vatCode =strip_tags($_POST['productVatCode']);
         $mainPicture =strip_tags($_POST['productMainPicture']);
+        $batchPrice =strip_tags($_POST['productBatchPrice']);
+        // On contrôle le nom du fichier photo
+        if(empty($_POST['productMainPicture'])) {
+            // mainPicture par default
+            $mainPicture = null;
+        }
 
-        // création de la catégorie
-        $sql='INSERT INTO items 
-            (itemCode, itemLabel, itemDescription, itemMinQty, itemCategoryCode, itemVatCode, itemMainPicture) 
-            VALUES
-            (:code, :label, :description, :minQty, :categoryCode, :vatCode, :mainPicture);';
-
-        $query = $pdo->prepare($sql);
-        $query->bindValue(':code', $code, PDO::PARAM_STR);
-        $query->bindValue(':label', $label, PDO::PARAM_STR);
-        $query->bindValue(':description', $description, PDO::PARAM_STR);
-        $query->bindValue(':minQty', $minQty, PDO::PARAM_INT);
-        $query->bindValue(':categoryCode', $categoryCode, PDO::PARAM_STR);
-        $query->bindValue(':vatCode', $vatCode, PDO::PARAM_INT);
-        $query->bindValue(':mainPicture', $mainPicture, PDO::PARAM_STR);
-        $query->execute();
-
-        // message de validation de l'action
-        $messages[] = 'Produit ajouté';
+        $newProduct = createProduct($pdo, $code, $label, $description, $qty, $categoryCode, $vatCode, $mainPicture, $batchPrice);
+        if($newProduct) {
+            // message de validation de l'action
+            $messages[] = 'Produit ajouté';
+        }
 
         } else {
         // formulaire incomplet
-        $errors[] = 'merci de remplir tous les champs pour créer la catégorie';
+        $errors[] = 'merci de remplir tous les champs pour créer le produit';
     }
 }
 ?>
@@ -79,41 +76,62 @@ if (isset($_POST['createProduct'])) {
 
         <div class="row">
                 <div class="mb-3 col-auto">
-                    <input name="productCode" type="text" class="form-control" placeholder="code produit" aria-label="item-code">
+                    <label for="code">Code produit :</label>
+                    <input id="code" name="productCode" type="text" class="form-control" placeholder="code unique du produit" aria-label="item-code">
                 </div>
                 <div class="mb-3 col-auto">
-                    <input name="productLabel" type="text" class="form-control" placeholder="libellé du produit" aria-label="item-label">
+                    <label for="label">Libellé produit :</label>
+                    <input id="label" name="productLabel" type="text" class="form-control" placeholder="libellé du produit" aria-label="item-label">
                 </div>
         </div>
 
         <div class="row">
                 <div class="mb-3 col-auto">
-                    <input name="productDescription" type="text" class="form-control" placeholder="description du produit" aria-label="item-description">
+                    <label for="description">Description produit :</label>
+                    <input id="description" name="productDescription" type="text" size="150" class="form-control" placeholder="description du produit" aria-label="item-description">
                 </div>
         </div>
 
         <div class="row">
                 <div class="mb-3 col-auto">
-                    <input name="productMinQty" type="number" value="1000" class="form-control" placeholder="minimum de commande" aria-label="item-min-qty">
+                    <label for="qty">Minimum de commande :</label>
+                    <input id="qty" name="productQty" type="number" value="<?= _BATCH_DEFAULT_QTY_ ?>" class="form-control" placeholder="minimum de commande" aria-label="item-min-qty">
                 </div>
         </div>
 
         <div class="row">
                 <div class="mb-3 col-auto">
-                    <input name="productCategoryCode" type="text" class="form-control" placeholder="code de la catégorie produit" aria-label="item-code">
-                </div>
-                <div class="mb-3 col-auto">
-                    <input name="productVatCode" type="number" class="form-control" placeholder="code TVA du produit" aria-label="item-label">
+                    <label for="category">Code catégorie :</label>
+                    <select id="category" name="productCategoryCode" class="form-control" placeholder="code de la catégorie produit" aria-label="item-code">
+                        <option value="">--Choisir une catégorie produit--</option>
+                        <?php foreach($categories as $row) { ?>
+                            <option value="<?= $row['categoryCode'] ?>"><?= $row['categoryName'] ?></option>
+                        <?php } ?>
+                    </select>
                 </div>
         </div>
 
         <div class="row">
                 <div class="mb-3 col-auto">
-                    <input name="productMainPicture" type="text" class="form-control" placeholder="image du produit" aria-label="item-min-qty">
+                    <label for="vat">Code TVA :</label>
+                    <input id="vat" name="productVatCode" type="number" class="form-control" placeholder="code TVA du produit" aria-label="item-label">
+                </div>
+                <div class="mb-3 col-auto">
+                    <label for="price">Prix unitaire :</label>
+                    <input id="price" name="productBatchPrice" type="text" class="form-control" placeholder="prix unitaire HT" aria-label="item-label">
                 </div>
         </div>
 
-        <button type="submit" name="createProduct" class="btn btn-success">Créer le produit</button>
+        <div class="row">
+                <div class="mb-3 col-auto">
+                    <label for="picture">Image principale :</label>
+                    <input id="picture" name="productMainPicture" type="text" class="form-control" placeholder="image du produit" aria-label="item-min-qty">
+                </div>
+        </div>
+
+        <button type="submit" name="createProduct" class="btn btn-success">
+        <i class="bi bi-plus-square"></i> Créer le produit
+        </button>
 
     </form>
 

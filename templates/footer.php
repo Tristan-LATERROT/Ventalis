@@ -12,7 +12,7 @@
       </div>
       <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
         <h5 class="text-uppercase">Footer produits</h5>
-		    <a class="text-dark" href="">Commander vos articles</a>
+		    <a class="text-dark" href="catalogue.php">Commander vos produits</a>
       </div>
     </div>
   </div>

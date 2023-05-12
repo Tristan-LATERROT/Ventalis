@@ -99,6 +99,7 @@ itemMinQty
 itemCategoryCode
 itemVatCode
 itemMainPicture
+itemBatchPrice
 - - - - - - - - - - - - - - - - - - - - - - - - -
 CREATE TABLE items (
 itemId INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -108,7 +109,8 @@ itemDescription TEXT NOT NULL,
 itemMinQty INT(11) NOT NULL,
 itemCategoryCode VARCHAR(25) NOT NULL,
 itemVatCode INT(5) NOT NULL,
-itemMainPicture VARCHAR(255) DEFAULT NULL
+itemMainPicture VARCHAR(255) DEFAULT NULL,
+itemBatchPrice FLOAT NOT NULL
 );
 
 // (NULL, 'itemCode', 'itemLabel', 'itemDescription', itemMinQty, 'itemCategoryCode', itemVatCodeCode, 'itemMainPicture'),

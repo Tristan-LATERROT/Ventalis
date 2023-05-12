@@ -26,7 +26,7 @@ require_once('templates/redirectUsers.php');
 						comme vecteur de votre communication</p>
 					</div>
 					<div class="col-xl-3 col-lg-2 col-md-12 mx-auto">
-					<a href="" class="nav-item btn btn-success me-md-2">commandez vos articles personnalisés</a>
+					<a href="catalogue.php" class="nav-item btn btn-success me-md-2">commandez vos articles personnalisés</a>
 					</div>
     			</div>
 				
@@ -45,7 +45,7 @@ require_once('templates/redirectUsers.php');
 						et ses actions et projets en faveur de l'écologie</p>
 					</div>
 					<div class="col-xl-3 col-lg-2 col-md-12 mx-auto">
-					<a href="" class="nav-item btn btn-success me-md-2">Découvrir l'entreprise et ses valeurs</a>
+					<a href="presentation.php" class="nav-item btn btn-success me-md-2">Découvrir l'entreprise et ses valeurs</a>
 					</div>
     			</div> 
     </div>
