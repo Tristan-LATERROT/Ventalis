@@ -65,17 +65,13 @@ if(isset($_GET['productId']) && !empty($_GET['productId'])) {
                         </div>
                         <div class="small mb-1"><?= $product['itemCode']?></div>
                         <p class="lead"><?= $product['itemDescription']?></p>
-                        <form action="panier.php">
                         <div class="d-flex">
                             <label for="inputQty">Nombre de lots à ajouter au panier : </label>
                             <input class="form-control text-center me-3" id="inputQty" type="number" value="1" />
                         </div>
                         <div class="d-flex">
-                            <button class="btn btn-outline-dark mt-5 flex-shrink-0" type="submit">
-                            <i class="bi bi-cart3"></i> Ajouter au panier
-                            </button>
+                        <a class="btn btn-outline-dark mt-5" href="panierAjouter.php?productId=<?= $product['itemId'] ?>"><i class="bi bi-cart3"></i> Ajouter au panier</a>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>

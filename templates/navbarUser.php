@@ -92,7 +92,22 @@
 					?>
 					<a class="btn btn-outline-dark mt-auto" href="panier.php">
 						<i class="bi bi-cart3"></i> Panier
-						<span class="badge bg-dark text-white ms-1 rounded-pill">2</span>
+						<?php
+						//si session panier on va afficher les produits dans le badge
+						if(isset($_SESSION['panier'])){ // calcul du badge
+						?>
+    						<span class="badge bg-dark text-white ms-1 rounded-pill">
+								<?=array_sum($_SESSION['panier'])?>
+							</span>
+						<?php
+						} else { // badge à zero
+						?>
+							<span class="badge bg-dark text-white ms-1 rounded-pill">
+								0
+							</span>
+						<?php
+						}
+						?>
 					</a>
 					<?php
 						}

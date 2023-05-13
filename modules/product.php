@@ -20,6 +20,13 @@ function getProductById(PDO $pdo, int $id) {
     return $query->fetch();
 }
 
+function getProductsByIdRange(PDO $pdo, array $ids) {
+	$sql = "SELECT * FROM items WHERE itemId IN (".implode(',', $ids).")";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    return $query->fetchall(PDO::FETCH_ASSOC);
+}
+
 function getProductImage(string|null $image) {
     if ($image === null) {
         return _ASSETS_IMG_PATH_.'Default-product.png';
