@@ -36,7 +36,9 @@ if(!isset($_SESSION['panier'])){
 	<th>produit</th>
     <th>Libellé du produit</th>
     <th>Catégorie</th>
+    <th>Prix d'un lot HT</th>
     <th>Nombre de lots</th>
+    <th>Nombre total produits</th>
     <th>Prix total HT</th>
     <th>Actions</th>
 </thead>
@@ -65,8 +67,10 @@ if(!isset($_SESSION['panier'])){
 			</td>
             <td><?= $row['itemLabel'] ?></td>
             <td><?= $row['itemCategoryCode'] ?></td>
+            <td><?= $row['itemBatchPrice'] ?> €</td>
             <td><?=$_SESSION['panier'][$row['itemId']] // Quantité?></td>
-            <td><?= $row['itemBatchPrice'] ?></td>
+            <td><?= $row['itemQty'] * $_SESSION['panier'][$row['itemId']] ?></td>
+            <td><?= $row['itemBatchPrice'] * $_SESSION['panier'][$row['itemId']] ?> €</td>
 			<td>
                 <a class="btn btn-success" href="panierAjouter.php?productId=<?= $row['itemId'] ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter"><i class="bi bi-cart-plus-fill"></i></a>
 				<a class="btn btn-warning" href="panierRetirer.php?productId=<?= $row['itemId'] ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Retirer"><i class="bi bi-cart-dash-fill"></i></a>
