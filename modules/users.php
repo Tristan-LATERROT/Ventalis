@@ -1,13 +1,29 @@
 <?php
 // CRUD users
-/*
+
 function getUsers(PDO $pdo) {
-$sql = 'SELECT * FROM users';
-$query = $pdo->prepare($sql);
-$query->execute();
-$result = $query->fetchall(PDO::FETCH_ASSOC);
+    $sql = 'SELECT * FROM users';
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    return $query->fetchall(PDO::FETCH_ASSOC);
 }
-*/
+
+function getUserById(PDO $pdo, string $id) {
+    $sql = 'SELECT * FROM users WHERE id = :id;';
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':id', $id, PDO::PARAM_STR);
+    $query->execute();
+    return $query->fetch();
+}
+
+function getUserByEmail(PDO $pdo, string $email) {
+    $sql = 'SELECT * FROM users WHERE email = :email;';
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':email', $email, PDO::PARAM_STR);
+    $query->execute();
+    return $query->fetch();
+}
+
 function getIdByEmail(PDO $pdo, string $email) {
     $sql = 'SELECT id FROM users WHERE email = :email';
     $query = $pdo->prepare($sql);

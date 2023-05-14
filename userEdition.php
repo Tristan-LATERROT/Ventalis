@@ -54,7 +54,7 @@ if($_POST){
 if(isset($_GET['id']) && !empty($_GET['id'])) {
     // on vient nettoyer la valeur de list
     $id = strip_tags($_GET['id']);
-    // Si ok on affiche tous le user
+    // Si ok on affiche le user
         $sql = 'SELECT * FROM users WHERE id = :id;';
         $query = $pdo->prepare($sql);
         $query->bindValue(':id', $id, PDO::PARAM_STR);

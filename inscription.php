@@ -4,6 +4,7 @@ $page = 'inscription';
 require_once('templates/header.php');
 require_once('settings/pdo.php');
 require_once('modules/signup.php');
+require_once('modules/users.php');
 
 // gestions messages et erreurs :
 $errors = [];
@@ -28,6 +29,10 @@ if (isset($_POST['createUser'])) {
             $salesAdvisor = getSalesAdvisor($pdo);
             $qry = createUser($pdo, $_POST['email'], $_POST['pwd'], $_POST['firstName'], $_POST['lastName'], $_POST['companyName'], $salesAdvisor['salesAdvisor']);
             if($qry) {
+                // on récupère l'id créé
+                $userId = getIdByEmail($pdo, $_POST['email']);
+                // ecriture du role
+                $role = createRole($pdo, $userId['id'], 1);
                 $messages[] = 'incription valide vous pouvez à présent vous connecter';
             } else {
                 $errors[] = 'erreur d\'inscription merci de refaire votre inscription'; 

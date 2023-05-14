@@ -49,7 +49,7 @@
 						</li>
 						<li class="nav-item">
 							<a 
-							href="" 
+							href="contact.php" 
 							class="nav-link <?php if($page =='contact') {echo 'active" aria-current="page';} ?>">
 							Contact
 							</a>

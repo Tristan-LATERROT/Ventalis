@@ -223,3 +223,29 @@ msgToId VARCHAR(255) NOT NULL,
 msg TEXT NOT NULL,
 msgTimestamp DATETIME NOT NULL
 );
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+messages_contact
+- - - - - - - - - - - - - - - - - - - - - - - - -
+msgContactId
+msgContactFirstName
+msgContactLastName
+msgContactCompanyName
+msgContactEmail
+msgContactObject
+msgContactMessage
+msgContactStatus
+msgContactTimestamp
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE messages_contact (
+msgContactId INT(11) PRIMARY KEY AUTO_INCREMENT,
+msgContactFirstName VARCHAR(255) NOT NULL,
+msgContactLastName VARCHAR(255) NOT NULL,
+msgContactCompanyName VARCHAR(255) NOT NULL,
+msgContactEmail VARCHAR(255),
+msgContactObject VARCHAR(255) NOT NULL,
+msgContactMessage TEXT NOT NULL,
+msgContactStatus VARCHAR(255) NOT NULL,
+msgContactTimestamp DATETIME NOT NULL
+);
