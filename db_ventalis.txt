@@ -249,3 +249,58 @@ msgContactMessage TEXT NOT NULL,
 msgContactStatus VARCHAR(255) NOT NULL,
 msgContactTimestamp DATETIME NOT NULL
 );
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+orders
+- - - - - - - - - - - - - - - - - - - - - - - - -
+orderId
+orderPublicId
+orderCustomerId
+orderTotalPrice
+orderStatusCode
+orderTimestamp
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE orders (
+orderId INT(11) PRIMARY KEY AUTO_INCREMENT, 
+orderPublicId VARCHAR(255) NOT NULL, 
+orderCustomerId VARCHAR(255) NOT NULL,
+orderTotalPrice FLOAT NOT NULL,
+orderStatusCode VARCHAR(255) NOT NULL,
+orderTimestamp DATETIME NOT NULL
+);
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+order_lines
+- - - - - - - - - - - - - - - - - - - - - - - - -
+orderLineId
+orderLinePublicId
+orderLineOrderPublicId
+orderLineIndex
+orderLineItemId
+orderLineItemBatchQty
+orderLineSubTotalPrice
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE order_lines (
+orderLineId INT(11) PRIMARY KEY AUTO_INCREMENT,
+orderLinePublicId VARCHAR(255) NOT NULL,
+orderLineOrderPublicId VARCHAR(255) NOT NULL, 
+orderLineIndex INT(5) NOT NULL,
+orderLineItemId INT(11) NOT NULL,
+orderLineItemBatchQty INT(11) NOT NULL,
+orderLineSubTotalPrice FLOAT NOT NULL
+);
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+order_status_list
+- - - - - - - - - - - - - - - - - - - - - - - - -
+orderStatusCode
+orderStatusLabel
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE order_status_list (
+orderStatusCode VARCHAR(255) PRIMARY KEY,
+orderStatusLabel VARCHAR(255),
+orderStatusDescription VARCHAR(255)
+);
