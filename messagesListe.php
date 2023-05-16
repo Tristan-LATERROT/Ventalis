@@ -16,8 +16,8 @@ $messages = [];
 if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
     $getUserId = getIdByEmail($pdo, $_SESSION['user']);
     if($getUserId){
-        // On filtre les clients associés au conseiller
-        $sql = 'SELECT * FROM users WHERE salesAdvisor = :salesId ';
+        // On filtre les clients associés au conseiller sans le conseiller lui même
+        $sql = 'SELECT * FROM users WHERE salesAdvisor = :salesId AND id != :salesId';
         $query = $pdo->prepare($sql);
         $query->bindParam(':salesId', $getUserId['id'], PDO::PARAM_STR);
         $query->execute();
