@@ -72,7 +72,9 @@
 					if (in_array('R_ADMIN', $_SESSION['roles'])) {
 						// si l'utilisateur possède ce rôle
 					?>
-					<a href="espaceAdmin.php" class="nav-item btn btn-outline-success me-md-2">Espace Admin</a>
+					<a href="espaceAdmin.php" class="nav-item btn btn-outline-success me-md-2">
+						<i class="bi bi-gear-fill"></i> Espace Admin
+					</a>
 					<?php
 						}
 					?>
@@ -81,7 +83,9 @@
 					if (in_array('R_SALES', $_SESSION['roles'])) {
 						// si l'utilisateur possède ce rôle
 					?>
-					<a href="espaceIntranet.php" class="nav-item btn btn-outline-success me-md-2">Intranet</a>
+					<a href="espaceIntranet.php" class="nav-item btn btn-outline-success me-md-2">
+					<i class="bi bi-pc-display"></i> Intranet
+					</a>
 					<?php
 						}
 					?>

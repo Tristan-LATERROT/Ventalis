@@ -56,7 +56,9 @@
 				</li>
 			</ul>
 			<div class="mx-auto d-grid">
-			<a href="connexion.php" class="nav-item btn btn-outline-success me-md-2">Se connecter</a>
+			<a href="connexion.php" class="nav-item btn btn-outline-success me-md-2">
+				<i class="bi bi-box-arrow-in-right"></i> Se connecter
+			</a>
 			</div>
 		</div>
 		

@@ -16,16 +16,15 @@ $messages = [];
 if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
     $getUserId = getIdByEmail($pdo, $_SESSION['user']);
     if($getUserId){
-        // On filtre les clients associés au conseiller
-        $sql = 'SELECT * FROM users WHERE salesAdvisor = :salesId ';
-        $query = $pdo->prepare($sql);
-        $query->bindParam(':salesId', $getUserId['id'], PDO::PARAM_STR);
-        $query->execute();
-        $customers = $query->fetchall(PDO::FETCH_ASSOC);
+        // On filtre sur le conseiller de vente
+        // récupérer le conseiller de vente
+        $userEmail = $_SESSION['user'];
+        $salesId = getSalesAdvisorId($pdo, $userEmail);
+        $salesAdvisor = getUserById($pdo, $salesId['salesAdvisor']);
 
-        if(!$customers) {
+        if(!$salesAdvisor) {
             // Si pas de client associé on envoi le message d'erreur
-            $errors[] = 'pas de contacts : aucun client associé à votre compte';
+            $errors[] = 'aucun conseiller associé à votre compte merci de nous contacter via la page de contact';
         }
 
     }else{
@@ -76,61 +75,52 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
 <main class="content">
     <div class="container p-0">
 
-		<h1 class="h3 mb-3">Messages</h1>
-		<p>cliquez sur votre contact pour échanger des messages</p>
+		<h1 class="h3 mb-3">Messages avec VENTALIS</h1>
+        <p>cliquez sur votre contact pour échanger des messages</p>
 
 		<div class="card">
 			<div class="row g-0">
 
-				<!-- liste contacts -->
+				<!-- contact conseiller -->
 				<div class="col-12 col-lg-5 col-xl-3 border-right">
-					<?php
-					foreach($customers as $row){
-					?>
-					<a href="messagesListe.php?id=<?= $row['id'] ?>" class="list-group-item list-group-item-action border-0">
+					<a href="messagesConseiller.php?id=<?= $salesAdvisor['id'] ?>" class="list-group-item list-group-item-action border-0">
 							<div class="d-flex align-items-start">
-								<img src="assets/img/avatar-default.png" class="rounded-circle mr-1" alt="Contact" width="40" height="40">
+								<img src="assets/img/avatar-man-cartoon.jpg" class="rounded-circle mr-1" alt="Conseiller" width="40" height="40">
 								<div class="flex-grow-1 ml-3">
-									<?= $row['firstName'].' '.$row['lastName'] ?>
-									<div class="small"><span class="fas fa-circle chat-online"></span><?= $row['companyName'] ?></div>
+									<?= $salesAdvisor['firstName'].' '.$salesAdvisor['lastName'] ?>
+									<div class="small"><span class="fas fa-circle chat-online"></span><?= $salesAdvisor['companyName'] ?></div>
 								</div>
 							</div>
 					</a>
-					<?php
-					}
-					?>
 					<hr class="d-block d-lg-none mt-1 mb-0">
 				</div>
 
-				<!-- messages avec le contact selectionné -->
+				<!-- messages avec le conseiller -->
 				<div class="col-12 col-lg-7 col-xl-9">
 
 					<?php
 					if(isset($_GET['id']) && !empty($_GET['id'])){
-						foreach($customers as $row){
-							if($row['id'] == $receiver) {
+							if($salesAdvisor['id'] == $receiver) {
 								?>
 								<div class="py-2 px-4 border-bottom d-none d-lg-block">
 									<div class="d-flex align-items-center py-1">
 										<div class="position-relative">
-											<img src="assets/img/avatar-default.png" class="rounded-circle mr-1" alt="Contact" width="40" height="40">
+											<img src="assets/img/avatar-man-cartoon.jpg" class="rounded-circle mr-1" alt="Conseiller" width="40" height="40">
 										</div>
 										<div class="flex-grow-1 pl-3">
-											<strong><?= $row['firstName'].' '.$row['lastName'].' - '.$row['companyName'] ?></strong>
+											<strong><?= $salesAdvisor['firstName'].' '.$salesAdvisor['lastName'].' - '.$salesAdvisor['companyName'] ?></strong>
 											<div class="text-muted small"><em>Messages...</em></div>
 										</div>
 									</div>
 								</div>
 								<?php
 							}
-						}
 					}
 					?>	
 
                     <!-- messages -->
 					<div class="position-relative">
 						<div class="chat-messages p-4">
-
 
 							<?php
 							if(isset($_GET['id']) && !empty($_GET['id'])){
@@ -140,10 +130,10 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
 							?>
 										<div class="d-flex flex-row justify-content-start mb-4">
 											<div>
-												<img src="assets/img/avatar-default.png" class="rounded-circle mr-1" alt="Contact" width="40" height="40">
+												<img src="assets/img/avatar-man-cartoon.jpg" class="rounded-circle mr-1" alt="Conseiller" width="40" height="40">
 											</div>
 											<div class="flex-shrink-1 text-light bg-success rounded py-2 px-3 ml-3" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?= $msg['msgTimestamp'] ?>">
-												<div class="fw-bold mb-1">Client</div>
+												<div class="fw-bold mb-1"><?= $salesAdvisor['firstName'] ?> de Ventalis</div>
 												<?= $msg['msg'] ?>
 											</div>
 										</div>
@@ -156,7 +146,7 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
 												<?= $msg['msg'] ?>
 											</div>
 											<div>
-												<img src="assets/img/avatar-man-cartoon.jpg" class="rounded-circle mr-1" alt="Conseiller" width="40" height="40">
+												<img src="assets/img/avatar-default.png" class="rounded-circle mr-1" alt="User" width="40" height="40">
 											</div>
 										</div>
 							<?php
