@@ -39,9 +39,43 @@ function getOrdersByCustomerId(PDO $pdo, string $customerId) {
     return $query->fetchall(PDO::FETCH_ASSOC);
 }
 
+function getOrdersByStatus(PDO $pdo, string $status) {
+    $query = $pdo->prepare("SELECT * FROM orders WHERE orderStatusCode = :orderStatus");
+    $query->bindParam(':orderStatus', $statusCode, PDO::PARAM_STR);
+    $query->execute();
+    return $query->fetchall(PDO::FETCH_ASSOC);
+}
+
+function getOrders(PDO $pdo) {
+    $query = $pdo->prepare("SELECT * FROM orders");
+    $query->execute();
+    return $query->fetchall(PDO::FETCH_ASSOC);
+}
+
 function getOrderLinesByOrderId(PDO $pdo, string $orderId) {
     $query = $pdo->prepare("SELECT * FROM order_lines WHERE orderLineOrderPublicId = :orderId");
     $query->bindParam(':orderId', $orderId, PDO::PARAM_STR);
     $query->execute();
     return $query->fetchall(PDO::FETCH_ASSOC);
+}
+
+function getOrderLines(PDO $pdo) {
+    $query = $pdo->prepare("SELECT * FROM order_lines");
+    $query->execute();
+    return $query->fetchall(PDO::FETCH_ASSOC);
+}
+
+function updateOrderStatusById(PDO $pdo, string $newStatus, string $orderId) {
+    $sql = "UPDATE orders SET orderStatusCode = :newStatus WHERE orders.orderPublicId = :orderId;";
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':newStatus', $newStatus, PDO::PARAM_STR);
+    $query->bindParam(':orderId', $orderId, PDO::PARAM_STR);
+    return $query->execute();
+}
+
+function deleteOrderByPublicId(PDO $pdo, string $orderId) {
+    $sql = "DELETE FROM orders WHERE orders.orderPublicId = :orderId;";
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':orderId', $orderId, PDO::PARAM_STR);
+    return $query->execute();
 }
