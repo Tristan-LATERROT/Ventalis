@@ -113,8 +113,12 @@
 						}
 					?>
 					
-					<a href="espace.php" class="nav-item btn btn-outline-success me-md-2">Mon espace</a>
-					<a href="deconnexion.php" class="nav-item btn btn-outline-danger me-md-2">Se déconnecter</a>
+					<a href="espace.php" class="nav-item btn btn-outline-success me-md-2">
+						<i class="bi bi-person-workspace"></i> Mon espace
+					</a>
+					<a href="deconnexion.php" class="nav-item btn btn-outline-danger me-md-2">
+						<i class="bi bi-box-arrow-left"></i> Déconnexion
+					</a>
 					</div>
 				</div>
 

@@ -33,6 +33,15 @@ function getIdByEmail(PDO $pdo, string $email) {
     return $userId;
 }
 
+function getSalesAdvisorId(PDO $pdo, string $email) {
+    $sql = 'SELECT salesAdvisor FROM users WHERE email = :email';
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':email', $email, PDO::PARAM_STR);
+    $query->execute();
+    $salesId = $query->fetch(PDO::FETCH_ASSOC);
+    return $salesId;
+}
+
 function createRole(PDO $pdo, string $id, int $roleId) {
     $sql = 'INSERT INTO users_roles (userRoleId, userId, roleId) VALUES (NULL, :id, :roleId)';
     $query = $pdo->prepare($sql);

@@ -31,3 +31,17 @@ function createOrderLine(PDO $pdo, string $linePublicId, string $lineOrderPublic
     $query->bindParam(':oLineSubTotalPrice', $lineSubTotalPrice, PDO::PARAM_STR);
     return $query->execute();
 }
+
+function getOrdersByCustomerId(PDO $pdo, string $customerId) {
+    $query = $pdo->prepare("SELECT * FROM orders WHERE orderCustomerId = :customerId");
+    $query->bindParam(':customerId', $customerId, PDO::PARAM_STR);
+    $query->execute();
+    return $query->fetchall(PDO::FETCH_ASSOC);
+}
+
+function getOrderLinesByOrderId(PDO $pdo, string $orderId) {
+    $query = $pdo->prepare("SELECT * FROM order_lines WHERE orderLineOrderPublicId = :orderId");
+    $query->bindParam(':orderId', $orderId, PDO::PARAM_STR);
+    $query->execute();
+    return $query->fetchall(PDO::FETCH_ASSOC);
+}

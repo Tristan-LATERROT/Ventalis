@@ -129,7 +129,7 @@ if(isset($_SESSION['panier']) && isset($_SESSION['user'])){
         <i class="bi bi-cart-plus-fill"></i> Continuer mes achats
         </a>
         <a class="btn btn-success" href="espace.php">
-        <i class="bi bi-file-earmark-text-fill"></i></i> Aller dans mon espace
+        <i class="bi bi-person-workspace"></i> Aller dans mon espace
         </a>
     </div>
 
