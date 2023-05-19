@@ -16,9 +16,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
     include_once('../modules/orders.php');
 
     // on déclare le statut de filtre
-    $status = 'CREEE';
+    $statusCode = 'CREEE';
     // on récupère les données
-    $orders = getOrdersByStatus($pdo, $status);
+    $orders = getOrdersByStatus($pdo, $statusCode);
 
     if($orders) {
         // on initialise un tableau associatif

@@ -39,7 +39,7 @@ function getOrdersByCustomerId(PDO $pdo, string $customerId) {
     return $query->fetchall(PDO::FETCH_ASSOC);
 }
 
-function getOrdersByStatus(PDO $pdo, string $status) {
+function getOrdersByStatus(PDO $pdo, string $statusCode) {
     $query = $pdo->prepare("SELECT * FROM orders WHERE orderStatusCode = :orderStatus");
     $query->bindParam(':orderStatus', $statusCode, PDO::PARAM_STR);
     $query->execute();
