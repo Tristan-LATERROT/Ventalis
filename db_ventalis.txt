@@ -304,3 +304,21 @@ orderStatusCode VARCHAR(255) PRIMARY KEY,
 orderStatusLabel VARCHAR(255),
 orderStatusDescription VARCHAR(255)
 );
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+users_tokens
+- - - - - - - - - - - - - - - - - - - - - - - - -
+tokenId
+tokenUserId
+tokenUserRole
+tokenValue
+tokenTimestamp
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE users_tokens (
+tokenId INT(11) PRIMARY KEY AUTO_INCREMENT, 
+tokenUserId VARCHAR(255) NOT NULL,
+tokenUserRole VARCHAR(50) NOT NULL,
+tokenValue TEXT NOT NULL,
+tokenTimestamp DATETIME NOT NULL
+);
