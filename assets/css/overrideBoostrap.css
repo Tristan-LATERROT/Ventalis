@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+:root {
+    --primary: #004728;
+    --secondary: #6B7A7F;
+    --success: #038A31;
+    --danger: #dc3545;
+    --warning: #fd7e14;
+    --info: #17a2b8;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --bs-nav-link-color: var(--primary);
+    --bs-link-color: var(--primary);
+    --bs-link-hover-color: var(--secondary);
+}
