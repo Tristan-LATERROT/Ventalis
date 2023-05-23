@@ -30,7 +30,7 @@ resetPwd VARCHAR(10)
 - - - - - - - - - - - - - - - - - - - - - - - - -
 roles
 - - - - - - - - - - - - - - - - - - - - - - - - -
-id
+roleId
 roleName
 - - - - - - - - - - - - - - - - - - - - - - - - -
 CREATE TABLE roles (		
@@ -47,7 +47,7 @@ INSERT INTO roles (id, roleName) VALUES
 - - - - - - - - - - - - - - - - - - - - - - - - -
 users_roles
 - - - - - - - - - - - - - - - - - - - - - - - - -
-id
+userRoleId
 userId
 roleId
 - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -89,13 +89,13 @@ INSERT INTO categories (categoryId, categoryCode, categoryName) VALUES
 
 * * * * * * * * * * * * * * * * * * * * * * * * *
 - - - - - - - - - - - - - - - - - - - - - - - - -
-categories
+items
 - - - - - - - - - - - - - - - - - - - - - - - - -
 itemId
 itemCode
 itemLabel
 itemDescription
-itemMinQty
+itemQty
 itemCategoryCode
 itemVatCode
 itemMainPicture
@@ -106,7 +106,7 @@ itemId INT(11) PRIMARY KEY AUTO_INCREMENT,
 itemCode VARCHAR(25) NOT NULL UNIQUE,
 itemLabel VARCHAR(50) NOT NULL,
 itemDescription TEXT NOT NULL,
-itemMinQty INT(11) NOT NULL,
+itemQty INT(11) NOT NULL,
 itemCategoryCode VARCHAR(25) NOT NULL,
 itemVatCode INT(5) NOT NULL,
 itemMainPicture VARCHAR(255) DEFAULT NULL,
@@ -301,8 +301,50 @@ orderStatusLabel
 - - - - - - - - - - - - - - - - - - - - - - - - -
 CREATE TABLE order_status_list (
 orderStatusCode VARCHAR(255) PRIMARY KEY,
-orderStatusLabel VARCHAR(255),
+orderStatusLabel VARCHAR(255) NOT NULL UNIQUE,
 orderStatusDescription VARCHAR(255)
+);
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+order_messages
+- - - - - - - - - - - - - - - - - - - - - - - - -
+orderMsgId
+orderMsgOrderPublicId
+orderMsgFromId
+orderMsgToId
+orderMessage
+orderMsgTimestamp
+
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE order_messages (
+orderMsgId INT(11) PRIMARY KEY AUTO_INCREMENT, 
+orderMsgOrderPublicId VARCHAR(255) NOT NULL,
+orderMsgFromId VARCHAR(255) NOT NULL,
+orderMsgToId VARCHAR(255) NOT NULL,
+orderMessage TEXT NOT NULL,
+tokenTimestamp DATETIME NOT NULL
+);
+
+* * * * * * * * * * * * * * * * * * * * * * * * *
+- - - - - - - - - - - - - - - - - - - - - - - - -
+order_comments
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE order_comments (
+orderComId INT(11) PRIMARY KEY AUTO_INCREMENT,
+orderComOrderPublicId VARCHAR(255) NOT NULL,
+orderComOrderStatus VARCHAR(255) NOT NULL,
+orderComment TEXT NOT NULL,
+orderComTimestamp DATETIME NOT NULL
+);
+
+- - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE TABLE users_tokens (
+tokenId INT(11) PRIMARY KEY AUTO_INCREMENT, 
+tokenUserId VARCHAR(255) NOT NULL,
+tokenUserRole VARCHAR(50) NOT NULL,
+tokenValue TEXT NOT NULL,
+tokenTimestamp DATETIME NOT NULL
 );
 
 * * * * * * * * * * * * * * * * * * * * * * * * *
