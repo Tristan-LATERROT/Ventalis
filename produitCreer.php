@@ -124,7 +124,7 @@ if (isset($_POST['createProduct'])) {
 
         <div class="row">
                 <div class="mb-3 col-auto">
-                    <label for="picture">Image principale :</label>
+                    <label for="picture">Image principale (facultatif) :</label>
                     <input id="picture" name="productMainPicture" type="text" class="form-control" placeholder="image du produit" aria-label="item-min-qty">
                 </div>
         </div>

@@ -15,7 +15,12 @@ if(isset($_SESSION['user'])) {
     // récupérer le conseiller de vente
     $userEmail = $_SESSION['user'];
     $salesId = getSalesAdvisorId($pdo, $userEmail);
-    $salesAdvisor = getUserById($pdo, $salesId['salesAdvisor']);
+    if($salesId == null) {
+        // pas de conseiller de vente pour le rôle admin
+    } else {
+        $salesAdvisor = getUserById($pdo, $salesId['salesAdvisor']);
+    }
+    
 } else {
     // ne devrais pas arriver avec le redirect
     $errors[] = 'Vous ne pouvez pas accéder à votre espace sans vous connecter';

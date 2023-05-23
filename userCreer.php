@@ -30,7 +30,6 @@ if (isset($_POST['createUser'])) {
             $qry = createUser($pdo, $_POST['email'], $_POST['pwd'], $_POST['firstName'], $_POST['lastName'], $_POST['companyName'], 'ventalis');
             if($qry) {
                 $userId = getIdByEmail($pdo, $_POST['email']);
-                var_dump($userId);
                 // initialisation du user id dans la requete de calcul des conseiller de vente
                 $initId = initSalesAdvisor($pdo, $userId['id']);
                 // ecriture du role
