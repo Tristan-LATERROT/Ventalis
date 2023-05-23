@@ -5,8 +5,8 @@ $username ='monuser';
 $pwd ='pass';
 
 try {
-    $pdo = new PDO('mysqldbname='.$dbname.';host='.$host, $username, $pwd);
+    $pdo = new PDO('mysql:dbname='.$dbname.';host='.$host, $username, $pwd);
 }
 catch(Exception $e) {
-    exit('Erreur  ' . $e-getMessage());
+    exit('Erreur  ' . $e->getMessage());
 }
