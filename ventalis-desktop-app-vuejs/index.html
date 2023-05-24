@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Ventalis Vue App</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <link rel="icon" href="./assets/img/vueLogo.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"/>
+    <link href="./assets/style/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+
+    <div id="app">
+
+    <!-- Navbar -->
+      <nav>
+      <div class="nav-container">
+        <div id="logo">
+          <router-link to="/">
+          <img src="./assets/img/v-logo-735.png" alt="logo" />
+        </router-link>
+        </div>
+
+        <ul id="icons">
+          <li>
+            <router-link to="/">
+            <i class="fas">🏠</i>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/user-settings">
+            <i class="fas">⌨️</i>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/orders">
+            <i class="fas">📦</i>
+            <span id="nav-notif"></span>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/order-details">
+            <i class="fas">🔍</i>
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Router views -->
+    <router-view></router-view>
+
+    </div>
+
+    <script type="text/x-template" id="home">
+      <div class="home-container">
+        <h1>Bienvenue sur l'App Ventalis</h1>
+      </div>
+    </script>
+
+    <script type="text/x-template" id="user">
+      <div class="user-container">
+        <h1>Mon espace</h1>
+      </div>
+    </script>
+
+    <script type="text/x-template" id="orders">
+      
+          <h1> Commandes au statut CREEE</h1>
+          
+          <!-- list display-->
+          <ul>
+            <li v-for="order in orders">
+                <img src="./assets/img/parcel.png" alt="" width="60">
+                <h3>Commande : {{ order.orderPublicId }}</h3>
+                <p>Date : {{ order.orderTimestamp }}</p>
+                <p>Client : {{ order.orderCustomerId }}</p>
+            </li>
+          </ul>
+
+          <div class="container">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Commande</th>
+                        <th>Date</th>
+                        <th>Client</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="order in orders" :key="order.orderId">
+                        <td>{{order.orderPublicId}}</td>
+                        <td>{{order.orderTimestamp}}</td>
+                        <td>{{order.orderCustomerId}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+
+
+    
+    </script>
+
+    <script type="text/x-template" id="orderDetails">
+      <div class="orders-container">
+        <h1>Détails de la commande</h1>
+      </div>
+    </script>
+
+
+    <!-- /dist/vue.global.js -->
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/vue-router@4"></script>
+    <script src="https://unpkg.com/vue-cookies@1.8.3/vue-cookies.js"></script>
+    <script src="./assets/js/vue.js"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>

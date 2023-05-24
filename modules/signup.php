@@ -34,7 +34,7 @@ function checkPwd(string $password) {
 
 function getSalesAdvisor(PDO $pdo) {
   $sql = "SELECT salesAdvisor, COUNT(salesAdvisor) FROM users 
-          WHERE salesAdvisor IS NOT null 
+          WHERE salesAdvisor IS NOT null AND salesAdvisor != ''
           GROUP BY salesAdvisor ORDER BY COUNT(salesAdvisor) ASC";
   $query = $pdo->prepare($sql);
   $query->execute();
